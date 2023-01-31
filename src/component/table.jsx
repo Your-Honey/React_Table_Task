@@ -87,9 +87,16 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
           <thead>
             <tr>
               <th>Id</th>
-              <th>Email</th>
+              <th>
+                Email{" "}
+                <span className="material-symbols-outlined icon">sort</span>
+              </th>
               <th>Password</th>
               <th>About</th>
+              <th>
+                Created At{" "}
+                <span className="material-symbols-outlined icon">sort</span>
+              </th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -105,7 +112,13 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
                       className="link"
                       onClick={() => handlePassword(detail.id)}
                     >
-                      {detail.showPassword ? "hide" : "show"}
+                      {detail.showPassword ? (
+                        <span className="material-symbols-outlined">
+                          lock_open
+                        </span>
+                      ) : (
+                        <span className="material-symbols-outlined">lock</span>
+                      )}
                     </span>
                   </td>
                   <td>
@@ -124,26 +137,33 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
                       </span>
                     ) : (
                       <span>
-                        {detail.about.substring(0, 21)}
+                        {detail.about.substring(0, 21)}....
                         <span
                           className="link"
                           onClick={() => handleAbout(detail.id)}
                         >
                           {" "}
-                          more...
+                          more
                         </span>
                       </span>
                     )}
                   </td>
+                  <td>{detail.createdAt}</td>
                   <td>
                     <Dropdown>
                       <Dropdown.Toggle as={CustomToggle} />
                       <Dropdown.Menu size="sm" title="">
                         <Dropdown.Item onClick={() => setDataEditTo(detail)}>
                           Edit
+                          <span className="material-symbols-outlined">
+                            edit
+                          </span>
                         </Dropdown.Item>
                         <Dropdown.Item onClick={() => deleteHandler(detail.id)}>
-                          Delete
+                          Delete{" "}
+                          <span className="material-symbols-outlined">
+                            auto_delete
+                          </span>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>

@@ -26,6 +26,13 @@ export default function RegisterForm({
   editDetail,
 }) {
   const onSubmit = (values) => {
+    const emailCheck = details.find(
+      (detail) => detail.email.toLowerCase() === values.email.toLowerCase()
+    );
+    if (emailCheck && !editData) {
+      window.alert("Email Already Exit");
+      return null;
+    }
     const data = {
       email: values.email,
       password: values.password,
