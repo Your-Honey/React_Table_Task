@@ -17,7 +17,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <span className="threedots" />
   </a>
 ));
-function DataTable({ details, setIdEditTo }) {
+function DataTable({ details, setDataEditTo }) {
   const [data, setData] = useState(details);
   useEffect(() => {
     console.log("details from table<<<", details);
@@ -51,7 +51,7 @@ function DataTable({ details, setIdEditTo }) {
                     <Dropdown>
                       <Dropdown.Toggle as={CustomToggle} />
                       <Dropdown.Menu size="sm" title="">
-                        <Dropdown.Item onClick={() => setIdEditTo(detail.id)}>
+                        <Dropdown.Item onClick={() => setDataEditTo(detail)}>
                           Edit
                         </Dropdown.Item>
                         <Dropdown.Item>Delete</Dropdown.Item>

@@ -4,20 +4,38 @@ import { useState } from "react";
 
 function App() {
   const [details, setDetails] = useState([]);
-  const [editId, setEditID] = useState(null);
+  const [editData, setEditData] = useState(null);
 
   const addDetail = (detail) => {
-    console.log("DETAIL FROM APP<<<", detail);
     setDetails(detail);
-    console.log("DETAILS FROM APP<<<", details);
   };
-  const setIdEditTo = (id) => {
-    setEditID(id);
+  const setDataEditTo = (data) => {
+    setEditData(data);
+  };
+
+  const editDetail = (data) => {
+    setDetails(
+      details.map((detail) => {
+        if (detail.id === data.id) {
+          return data;
+        } else {
+          return detail;
+        }
+      })
+    );
+
+    console.log("after update list<<<", details);
+    setEditData(null);
   };
   return (
     <div>
-      <RegisterForm addDetail={addDetail} details={details} editId={editId} />
-      <DataTable details={details} setIdEditTo={setIdEditTo} />
+      <RegisterForm
+        addDetail={addDetail}
+        details={details}
+        editData={editData}
+        editDetail={editDetail}
+      />
+      <DataTable details={details} setDataEditTo={setDataEditTo} />
     </div>
   );
 }

@@ -19,36 +19,50 @@ const initialValues = {
   about: "",
 };
 
-export default function RegisterForm({ addDetail, editId, details }) {
+export default function RegisterForm({
+  addDetail,
+  editData,
+  details,
+  editDetail,
+}) {
   const onSubmit = (values) => {
     const data = {
       email: values.email,
       password: values.password,
       about: values.about,
-      id: new Date().toLocaleString(),
-      createdAt: new Date().toLocaleString(),
     };
-    console.log(data);
+    if (editData) {
+      data.id = editData.id;
+      data.createdAt = editData.createdAt;
+      editDetail(data);
+    } else {
+      data.id = new Date().toLocaleString();
+      data.createdAt = new Date().toLocaleString();
+      addDetail([...details, data]);
+    }
+
     resetForm();
-    addDetail([...details, data]);
   };
-
   React.useEffect(() => {
-    if (editId) {
-      const dataToEdit = details.find((d) => d.id === editId);
-      initialValues.email = dataToEdit.email;
-      initialValues.password = dataToEdit.password;
-      initialValues.about = dataToEdit.about;
+    if (editData) {
+      setFieldValue("email", editData.email);
+      setFieldValue("password", editData.password);
+      setFieldValue("about", editData.about);
     }
-  }, [editId]);
+  }, [editData]);
 
-  const { handleSubmit, getFieldProps, errors, touched, resetForm } = useFormik(
-    {
-      initialValues,
-      onSubmit,
-      validationSchema,
-    }
-  );
+  const {
+    handleSubmit,
+    setFieldValue,
+    getFieldProps,
+    errors,
+    touched,
+    resetForm,
+  } = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -115,7 +129,7 @@ export default function RegisterForm({ addDetail, editId, details }) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {editId ? "Update" : "Add"}
+              {editData ? "Update" : "Add"}
             </Button>
             <Grid container justifyContent="flex-end"></Grid>
           </Box>
