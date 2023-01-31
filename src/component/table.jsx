@@ -18,10 +18,20 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   </a>
 ));
 function DataTable({ details, setDataEditTo, removeDetail }) {
-  const [data, setData] = useState(details);
+  //const [data, setData] = useState(details);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredData, setFilteredData] = useState(details);
   useEffect(() => {
-    setData(details);
-  }, [details]);
+    const filtered = details.filter((item) => {
+      return (
+        item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.password.toString().includes(searchTerm) ||
+        item.about.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+
+    setFilteredData(filtered);
+  }, [searchTerm, details]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {
@@ -31,7 +41,20 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
 
   return (
     <Container>
-      {data.length === 0 ? (
+      <div className="input-group">
+        <div className="form-outline">
+          <input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            id="search-input"
+            placeholder="Search..."
+            type="search"
+            className="form-control searchbar"
+          />
+        </div>
+      </div>
+
+      {filteredData.length === 0 ? (
         <div>No Data</div>
       ) : (
         <Table striped bordered hover>
@@ -45,7 +68,7 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
             </tr>
           </thead>
           <tbody>
-            {data.map((detail, index) => {
+            {filteredData.map((detail, index) => {
               return (
                 <tr key={detail.id}>
                   <td>{index + 1}</td>
