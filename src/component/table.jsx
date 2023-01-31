@@ -17,12 +17,17 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <span className="threedots" />
   </a>
 ));
-function DataTable({ details, setDataEditTo }) {
+function DataTable({ details, setDataEditTo, removeDetail }) {
   const [data, setData] = useState(details);
   useEffect(() => {
-    console.log("details from table<<<", details);
     setData(details);
   }, [details]);
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure to delete?")) {
+      removeDetail(id);
+    }
+  };
 
   return (
     <Container>
@@ -54,7 +59,9 @@ function DataTable({ details, setDataEditTo }) {
                         <Dropdown.Item onClick={() => setDataEditTo(detail)}>
                           Edit
                         </Dropdown.Item>
-                        <Dropdown.Item>Delete</Dropdown.Item>
+                        <Dropdown.Item onClick={() => deleteHandler(detail.id)}>
+                          Delete
+                        </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </td>

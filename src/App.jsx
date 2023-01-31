@@ -27,6 +27,10 @@ function App() {
     console.log("after update list<<<", details);
     setEditData(null);
   };
+
+  const removeDetail = (id) => {
+    setDetails(details.filter((detail) => detail.id !== id));
+  };
   return (
     <div>
       <RegisterForm
@@ -35,7 +39,11 @@ function App() {
         editData={editData}
         editDetail={editDetail}
       />
-      <DataTable details={details} setDataEditTo={setDataEditTo} />
+      <DataTable
+        details={details}
+        setDataEditTo={setDataEditTo}
+        removeDetail={removeDetail}
+      />
     </div>
   );
 }
