@@ -54,6 +54,7 @@ export default function RegisterForm({
 
     resetForm();
   };
+  console.log("form");
   React.useEffect(() => {
     if (editData) {
       setFieldValue("email", editData.email);

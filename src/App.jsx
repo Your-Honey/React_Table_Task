@@ -5,7 +5,7 @@ import { useState } from "react";
 function App() {
   const [details, setDetails] = useState([]);
   const [editData, setEditData] = useState(null);
-
+  console.log("app");
   const addDetail = (detail) => {
     setDetails(detail);
   };

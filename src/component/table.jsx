@@ -20,6 +20,9 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 function DataTable({ details, setDataEditTo, removeDetail }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(details);
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  console.log("table");
 
   useEffect(() => {
     const filtered = details.filter((item) => {
@@ -29,14 +32,29 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
         item.about.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
+    const sortedData = filtered.sort((a, b) =>
+      a["createdAt"] < b["createdAt"] ? 1 : -1
+    );
 
-    setFilteredData(filtered);
+    setFilteredData(sortedData);
   }, [details, searchTerm]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {
       removeDetail(id);
     }
+  };
+
+  const handleSort = (fieldName) => {
+    const sortedData = filteredData.sort((a, b) => {
+      if (sortOrder === "asc") {
+        return a[fieldName].toLowerCase() < b[fieldName].toLowerCase() ? 1 : -1;
+      } else {
+        return a[fieldName].toLowerCase() < b[fieldName].toLowerCase() ? -1 : 1;
+      }
+    });
+    setFilteredData(sortedData);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   const handlePassword = (id) => {
@@ -89,13 +107,23 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
               <th>Id</th>
               <th>
                 Email{" "}
-                <span className="material-symbols-outlined icon">sort</span>
+                <span
+                  className="material-symbols-outlined icon"
+                  onClick={() => handleSort("email")}
+                >
+                  sort
+                </span>
               </th>
               <th>Password</th>
               <th>About</th>
               <th>
                 Created At{" "}
-                <span className="material-symbols-outlined icon">sort</span>
+                <span
+                  className="material-symbols-outlined icon"
+                  onClick={() => handleSort("createdAt")}
+                >
+                  sort
+                </span>
               </th>
               <th>Actions</th>
             </tr>
