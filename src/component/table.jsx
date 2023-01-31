@@ -18,9 +18,9 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   </a>
 ));
 function DataTable({ details, setDataEditTo, removeDetail }) {
-  //const [data, setData] = useState(details);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(details);
+
   useEffect(() => {
     const filtered = details.filter((item) => {
       return (
@@ -31,12 +31,38 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
     });
 
     setFilteredData(filtered);
-  }, [searchTerm, details]);
+  }, [details, searchTerm]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {
       removeDetail(id);
     }
+  };
+
+  const handlePassword = (id) => {
+    setFilteredData(
+      filteredData.map((item) => {
+        if (item.id === id) {
+          item.showPassword = !item.showPassword;
+          return item;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleAbout = (id) => {
+    setFilteredData(
+      filteredData.map((item) => {
+        if (item.id === id) {
+          item.showText = !item.showText;
+          return item;
+        } else {
+          return item;
+        }
+      })
+    );
   };
 
   return (
@@ -73,8 +99,42 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
                 <tr key={detail.id}>
                   <td>{index + 1}</td>
                   <td>{detail.email}</td>
-                  <td>{detail.password}</td>
-                  <td>{detail.about}</td>
+                  <td>
+                    {detail.showPassword ? detail.password : "****************"}
+                    <span
+                      className="link"
+                      onClick={() => handlePassword(detail.id)}
+                    >
+                      {detail.showPassword ? "hide" : "show"}
+                    </span>
+                  </td>
+                  <td>
+                    {detail.about.length <= 20 ? (
+                      detail.about
+                    ) : detail.showText ? (
+                      <span>
+                        {detail.about}
+                        <span
+                          className="link"
+                          onClick={() => handleAbout(detail.id)}
+                        >
+                          {" "}
+                          less
+                        </span>
+                      </span>
+                    ) : (
+                      <span>
+                        {detail.about.substring(0, 21)}
+                        <span
+                          className="link"
+                          onClick={() => handleAbout(detail.id)}
+                        >
+                          {" "}
+                          more...
+                        </span>
+                      </span>
+                    )}
+                  </td>
                   <td>
                     <Dropdown>
                       <Dropdown.Toggle as={CustomToggle} />

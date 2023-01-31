@@ -6,3 +6,10 @@
 .searchbar{
   margin-bottom: 10%;
 }
+.link{
+  
+    text-decoration: underline;
+    text-decoration-color: blue;
+    color:blue;
+  
+}

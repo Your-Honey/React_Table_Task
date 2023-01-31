@@ -34,10 +34,14 @@ export default function RegisterForm({
     if (editData) {
       data.id = editData.id;
       data.createdAt = editData.createdAt;
+      data.showPassword = editData.showPassword;
+      data.showText = editData.showPassword;
       editDetail(data);
     } else {
       data.id = new Date().toLocaleString();
       data.createdAt = new Date().toLocaleString();
+      data.showPassword = false;
+      data.showText = false;
       addDetail([...details, data]);
     }
 
