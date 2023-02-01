@@ -4,7 +4,7 @@ import { useState } from "react";
 import { userData } from "./userData";
 
 function App() {
-  const [details, setDetails] = useState(userData.slice(0, 3));
+  const [details, setDetails] = useState(userData.slice(0, 4));
   const [editData, setEditData] = useState(null);
   console.log("app");
   const addDetail = (detail) => {
@@ -29,6 +29,13 @@ function App() {
     setEditData(null);
   };
 
+  const addDataOnDemand = () => {
+    setDetails([
+      ...details,
+      ...userData.slice(details.length, details.length + 4),
+    ]);
+  };
+
   const removeDetail = (id) => {
     setDetails(details.filter((detail) => detail.id !== id));
   };
@@ -44,6 +51,7 @@ function App() {
         details={details}
         setDataEditTo={setDataEditTo}
         removeDetail={removeDetail}
+        addDataOnDemand={addDataOnDemand}
       />
     </div>
   );

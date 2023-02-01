@@ -17,7 +17,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <span className="threedots" />
   </a>
 ));
-function DataTable({ details, setDataEditTo, removeDetail }) {
+function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(details);
   const [sortOrder, setSortOrder] = useState("desc");
@@ -93,6 +93,8 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
       if (scrollTop + clientHeight === scrollHeight) {
         // TO SOMETHING HERE
+        listInnerRef.current.scrollTop = 200;
+        addDataOnDemand();
         console.log("Reached bottom");
       }
     }
