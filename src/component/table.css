@@ -17,3 +17,13 @@
 .icon{
   float:right;
 }
+
+thead{ 
+  position: "fixed";
+  
+}
+
+.recordcount{
+  padding-top: 10%;
+}
+

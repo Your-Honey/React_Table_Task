@@ -4,7 +4,7 @@ import { useState } from "react";
 import { userData } from "./userData";
 
 function App() {
-  const [details, setDetails] = useState(userData);
+  const [details, setDetails] = useState(userData.slice(0, 3));
   const [editData, setEditData] = useState(null);
   console.log("app");
   const addDetail = (detail) => {
