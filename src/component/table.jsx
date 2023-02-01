@@ -32,11 +32,11 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
         item.about.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
-    const sortedData = filtered.sort((a, b) =>
-      a["createdAt"] < b["createdAt"] ? 1 : -1
-    );
+    filtered.sort((a, b) => {
+      return new Date(b["createdAt"]) - new Date(a["createdAt"]);
+    });
 
-    setFilteredData(sortedData);
+    setFilteredData(filtered);
   }, [details, searchTerm]);
 
   const deleteHandler = (id) => {
@@ -48,8 +48,14 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
   const handleSort = (fieldName) => {
     const sortedData = filteredData.sort((a, b) => {
       if (sortOrder === "asc") {
+        if (fieldName === "createdAt") {
+          return new Date(b["createdAt"]) - new Date(a["createdAt"]);
+        }
         return a[fieldName].toLowerCase() < b[fieldName].toLowerCase() ? 1 : -1;
       } else {
+        if (fieldName === "createdAt") {
+          return new Date(a["createdAt"]) - new Date(b["createdAt"]);
+        }
         return a[fieldName].toLowerCase() < b[fieldName].toLowerCase() ? -1 : 1;
       }
     });
@@ -176,7 +182,7 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
                       </span>
                     )}
                   </td>
-                  <td>{detail.createdAt}</td>
+                  <td>{timeSince(detail.createdAt)}</td>
                   <td>
                     <Dropdown>
                       <Dropdown.Toggle as={CustomToggle} />
@@ -204,6 +210,29 @@ function DataTable({ details, setDataEditTo, removeDetail }) {
       )}
     </Container>
   );
+}
+
+function timeSince(date) {
+  const now = new Date().toLocaleString();
+  const secondsPast =
+    (new Date(now).getTime() - new Date(date).getTime()) / 1000;
+
+  if (secondsPast < 60) {
+    return " Just Now";
+  }
+  if (secondsPast < 3600) {
+    return parseInt(secondsPast / 60) + " minutes ago";
+  }
+  if (secondsPast <= 86400) {
+    return parseInt(secondsPast / 3600) + " hours ago";
+  }
+  if (secondsPast <= 259200) {
+    return parseInt(secondsPast / 86400) + " days ago";
+  }
+  if (secondsPast <= 31104000) {
+    return parseInt(secondsPast / 2592000) + " months ago";
+  }
+  return parseInt(secondsPast / 31104000) + " years ago";
 }
 
 export default DataTable;

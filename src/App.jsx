@@ -1,9 +1,10 @@
 import RegisterForm from "./component/form";
 import DataTable from "./component/table";
 import { useState } from "react";
+import { userData } from "./userData";
 
 function App() {
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState(userData);
   const [editData, setEditData] = useState(null);
   console.log("app");
   const addDetail = (detail) => {
