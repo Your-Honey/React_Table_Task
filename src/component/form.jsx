@@ -63,6 +63,8 @@ export default function RegisterForm({
     }
   }, [editData]);
 
+  const [hidePassword, setHidePassword] = React.useState(true);
+
   const {
     handleSubmit,
     setFieldValue,
@@ -110,11 +112,27 @@ export default function RegisterForm({
                   fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={hidePassword ? "password" : "text"}
                   id="password"
                   autoComplete="new-password"
                   {...getFieldProps("password")}
                 />
+                {hidePassword ? (
+                  <span
+                    class="material-symbols-outlined"
+                    onClick={() => setHidePassword(!hidePassword)}
+                  >
+                    visibility
+                  </span>
+                ) : (
+                  <span
+                    onClick={() => setHidePassword(!hidePassword)}
+                    class="material-symbols-outlined"
+                  >
+                    visibility_off
+                  </span>
+                )}
+
                 {errors.password && touched.password ? (
                   <div className="error">{errors.password}</div>
                 ) : null}
