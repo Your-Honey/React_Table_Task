@@ -19,7 +19,9 @@
 }
 
 thead{ 
-  position: "fixed";
+  position: sticky;
+    top: 0;
+    background: #EDEDED;
   
 }
 

@@ -93,7 +93,10 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
       const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
       if (scrollTop + clientHeight === scrollHeight) {
         // TO SOMETHING HERE
-        listInnerRef.current.scrollTop = 200;
+        if (!scrollTop === 2075) {
+          listInnerRef.current.scrollTop = 200;
+        }
+
         addDataOnDemand();
         console.log("Reached bottom");
       }
@@ -119,7 +122,7 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
         <div>No Data</div>
       ) : (
         <>
-          <div>Total Record {filteredData.length}</div>
+          <div>Total Record in Table {filteredData.length} out of 25</div>
           <div
             style={{ height: "230px", overflowY: "scroll" }}
             onScroll={() => onScroll()}
