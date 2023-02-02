@@ -2,9 +2,11 @@ import RegisterForm from "./component/form";
 import DataTable from "./component/table";
 import { useState } from "react";
 import { userData } from "./userData";
+import "./app.css";
 
 function App() {
-  const [details, setDetails] = useState(userData.slice(0, 4));
+  const countOfDataToFetch = 6;
+  const [details, setDetails] = useState(userData.slice(0, countOfDataToFetch));
   const [editData, setEditData] = useState(null);
   console.log("app");
   const addDetail = (detail) => {
@@ -32,7 +34,7 @@ function App() {
   const addDataOnDemand = () => {
     setDetails([
       ...details,
-      ...userData.slice(details.length, details.length + 4),
+      ...userData.slice(details.length, details.length + countOfDataToFetch),
     ]);
   };
 
@@ -40,19 +42,23 @@ function App() {
     setDetails(details.filter((detail) => detail.id !== id));
   };
   return (
-    <div>
-      <RegisterForm
-        addDetail={addDetail}
-        details={details}
-        editData={editData}
-        editDetail={editDetail}
-      />
-      <DataTable
-        details={details}
-        setDataEditTo={setDataEditTo}
-        removeDetail={removeDetail}
-        addDataOnDemand={addDataOnDemand}
-      />
+    <div className="parentdiv">
+      <div>
+        <RegisterForm
+          addDetail={addDetail}
+          details={details}
+          editData={editData}
+          editDetail={editDetail}
+        />
+      </div>
+      <div>
+        <DataTable
+          details={details}
+          setDataEditTo={setDataEditTo}
+          removeDetail={removeDetail}
+          addDataOnDemand={addDataOnDemand}
+        />
+      </div>
     </div>
   );
 }

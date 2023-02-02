@@ -1,3 +1,17 @@
 .error{
-    color:red
+    color:red;
+    font-size:14px;
+  }
+
+  .passwordfield{
+    position: relative;
+  }
+  .passwordfield .material-symbols-outlined{
+    position: absolute;
+    right:16px;
+    top:34px;
+    cursor: pointer;
+  }
+  .formloadingimg{
+    width: 20px;
   }

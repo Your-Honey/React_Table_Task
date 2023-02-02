@@ -5,12 +5,14 @@
 
 .searchbar{
   margin-bottom: 10%;
+  margin-top: 10%;
 }
 .link{
   
     text-decoration: underline;
     text-decoration-color: blue;
     color:blue;
+    cursor: pointer;
   
 }
 
@@ -20,10 +22,32 @@
 
 thead{ 
   position: sticky;
-    top: 0;
+  top: 0;
     background: #EDEDED;
   
 }
+
+.material-symbols-outlined{
+  cursor: pointer;
+}
+
+td {
+  width: 100px;
+  word-wrap: break-word;
+}
+
+.table{
+  width: 500px;
+  table-layout: fixed;
+}
+.loadingimg{
+  width: 20px;
+  height: 20px;
+  position: relative;
+  right:-6px;
+  top:34px;
+}
+
 
 
 

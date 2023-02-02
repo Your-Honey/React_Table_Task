@@ -33,26 +33,31 @@ export default function RegisterForm({
       window.alert("Email Already Exit");
       return null;
     }
+
     const data = {
       email: values.email,
       password: values.password,
       about: values.about,
     };
-    if (editData) {
-      data.id = editData.id;
-      data.createdAt = editData.createdAt;
-      data.showPassword = editData.showPassword;
-      data.showText = editData.showPassword;
-      editDetail(data);
-    } else {
-      data.id = new Date().toLocaleString();
-      data.createdAt = new Date().toLocaleString();
-      data.showPassword = false;
-      data.showText = false;
-      addDetail([...details, data]);
-    }
+    setLoading(true);
+    setTimeout(() => {
+      if (editData) {
+        data.id = editData.id;
+        data.createdAt = editData.createdAt;
+        data.showPassword = editData.showPassword;
+        data.showText = editData.showPassword;
+        editDetail(data);
+      } else {
+        data.id = new Date().toLocaleString();
+        data.createdAt = new Date().toLocaleString();
+        data.showPassword = false;
+        data.showText = false;
+        addDetail([...details, data]);
+      }
 
-    resetForm();
+      resetForm();
+      setLoading(false);
+    }, 2000);
   };
   console.log("form");
   React.useEffect(() => {
@@ -64,6 +69,7 @@ export default function RegisterForm({
   }, [editData]);
 
   const [hidePassword, setHidePassword] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
 
   const {
     handleSubmit,
@@ -99,14 +105,14 @@ export default function RegisterForm({
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  autoComplete="off"
                   {...getFieldProps("email")}
                 />
                 {errors.email && touched.email ? (
                   <div className="error">{errors.email}</div>
                 ) : null}
               </Grid>
-              <Grid item xs={12}>
+              <Grid className="passwordfield" item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -159,7 +165,20 @@ export default function RegisterForm({
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              {editData ? "Update" : "Add"}
+              {loading ? (
+                <>
+                  <p style={{ marginBottom: "0" }}>Submitting... </p>
+                  <img
+                    className="formloadingimg"
+                    src="loading-buffering.gif"
+                    alt="loading..."
+                  />
+                </>
+              ) : editData ? (
+                "Update"
+              ) : (
+                "Add"
+              )}
             </Button>
             <Grid container justifyContent="flex-end"></Grid>
           </Box>
