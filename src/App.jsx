@@ -8,6 +8,8 @@ function App() {
   const countOfDataToFetch = 6;
   const [details, setDetails] = useState(userData.slice(0, countOfDataToFetch));
   const [editData, setEditData] = useState(null);
+  const [recordFetchedFromDb, setRecordFetchedFromDb] =
+    useState(countOfDataToFetch);
   console.log("app");
   const addDetail = (detail) => {
     setDetails(detail);
@@ -26,21 +28,36 @@ function App() {
         }
       })
     );
-
-    console.log("after update list<<<", details);
     setEditData(null);
   };
 
   const addDataOnDemand = () => {
     setDetails([
       ...details,
-      ...userData.slice(details.length, details.length + countOfDataToFetch),
+      ...userData.slice(
+        recordFetchedFromDb,
+        recordFetchedFromDb + countOfDataToFetch
+      ),
     ]);
+    setRecordFetchedFromDb((prev) => prev + countOfDataToFetch);
   };
 
   const removeDetail = (id) => {
-    setDetails(details.filter((detail) => detail.id !== id));
+    setDetails((prev) => prev.filter((detail) => detail.id !== id));
   };
+  const removeMutipleDetail = (items) => {
+    setDetails((prev) =>
+      prev.filter((detail) => {
+        return !items.some((obj) => obj.id === detail.id);
+      })
+    );
+
+    console.log("details<<<<", details);
+  };
+  if (details.length < countOfDataToFetch - 1 && recordFetchedFromDb < 30) {
+    addDataOnDemand();
+  }
+
   return (
     <div className="parentdiv">
       <div>
@@ -57,6 +74,7 @@ function App() {
           setDataEditTo={setDataEditTo}
           removeDetail={removeDetail}
           addDataOnDemand={addDataOnDemand}
+          removeMutipleDetail={removeMutipleDetail}
         />
       </div>
     </div>

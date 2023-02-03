@@ -42,16 +42,13 @@ export default function RegisterForm({
     setLoading(true);
     setTimeout(() => {
       if (editData) {
-        data.id = editData.id;
-        data.createdAt = editData.createdAt;
-        data.showPassword = editData.showPassword;
-        data.showText = editData.showPassword;
-        editDetail(data);
+        editDetail({ ...editData, ...data });
       } else {
         data.id = new Date().toLocaleString();
         data.createdAt = new Date().toLocaleString();
         data.showPassword = false;
         data.showText = false;
+        data.checkBoxValue = false;
         addDetail([...details, data]);
       }
 
@@ -100,9 +97,7 @@ export default function RegisterForm({
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
-                  id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="off"
@@ -114,18 +109,16 @@ export default function RegisterForm({
               </Grid>
               <Grid className="passwordfield" item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   name="password"
                   label="Password"
                   type={hidePassword ? "password" : "text"}
-                  id="password"
                   autoComplete="new-password"
                   {...getFieldProps("password")}
                 />
                 {hidePassword ? (
                   <span
-                    class="material-symbols-outlined"
+                    className="material-symbols-outlined"
                     onClick={() => setHidePassword(!hidePassword)}
                   >
                     visibility
@@ -133,7 +126,7 @@ export default function RegisterForm({
                 ) : (
                   <span
                     onClick={() => setHidePassword(!hidePassword)}
-                    class="material-symbols-outlined"
+                    className="material-symbols-outlined"
                   >
                     visibility_off
                   </span>
@@ -150,8 +143,6 @@ export default function RegisterForm({
                   minRows={2}
                   style={{ width: 400 }}
                   name="about"
-                  required
-                  id="about"
                   {...getFieldProps("about")}
                 />
                 {errors.about && touched.about ? (

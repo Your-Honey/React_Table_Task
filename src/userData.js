@@ -8,6 +8,7 @@ export const userData = [
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     showText: false,
     createdAt: "01/02/2023, 11:07:52",
+    checkBoxValue: false,
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ export const userData = [
     about: "It long established ",
     showText: false,
     createdAt: "01/02/2022, 11:07:52",
+    checkBoxValue: false,
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ export const userData = [
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     showText: false,
     createdAt: "01/02/2023, 9:07:52",
+    checkBoxValue: false,
   },
   {
     id: 4,
@@ -37,6 +40,7 @@ export const userData = [
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     showText: false,
     createdAt: "01/10/2022, 11:07:52",
+    checkBoxValue: false,
   },
   {
     id: 5,
@@ -47,6 +51,7 @@ export const userData = [
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     showText: false,
     createdAt: "01/02/2023, 11:07:52",
+    checkBoxValue: false,
   },
   {
     id: 6,
@@ -57,6 +62,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "1/11/2022, 8:15:55 ",
+    checkBoxValue: false,
   },
   {
     id: 7,
@@ -67,6 +73,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/1999, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 8,
@@ -77,6 +84,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "1/1/2023, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 9,
@@ -87,6 +95,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2015, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 10,
@@ -97,6 +106,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2003, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 11,
@@ -107,6 +117,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2003, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 12,
@@ -117,6 +128,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2013, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 13,
@@ -127,6 +139,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2012, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 14,
@@ -137,6 +150,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2000, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 15,
@@ -147,6 +161,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2003, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 16,
@@ -157,6 +172,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2004, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 17,
@@ -167,6 +183,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2008, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 18,
@@ -177,6 +194,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2007, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 19,
@@ -187,6 +205,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2008, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 20,
@@ -197,6 +216,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "8/1/2009, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 21,
@@ -207,6 +227,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "2/1/2022, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 22,
@@ -217,6 +238,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "6/1/2012, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 23,
@@ -227,6 +249,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "5/1/2019, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 24,
@@ -237,6 +260,7 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "1/1/2000, 8:15:56 ",
+    checkBoxValue: false,
   },
   {
     id: 25,
@@ -247,5 +271,6 @@ export const userData = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English.",
     createdAt: "1/1/2023, 8:15:56 ",
+    checkBoxValue: false,
   },
 ];

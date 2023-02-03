@@ -48,6 +48,16 @@ td {
   top:34px;
 }
 
+.deleteicon{
+  position: relative;
+  top: 6px;
+  left: 3px;
+}
+
+.deletebutton{
+  margin-top: 10px;
+}
+
 
 
 

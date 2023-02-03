@@ -5,6 +5,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import "./table.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Button from "react-bootstrap/Button";
 // eslint-disable-next-line react/display-name
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
@@ -19,12 +20,19 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <span className="threedots" />
   </a>
 ));
-function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
+function DataTable({
+  details,
+  removeMutipleDetail,
+  setDataEditTo,
+  addDataOnDemand,
+  removeDetail,
+}) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(details);
   const [sortOrder, setSortOrder] = useState("desc");
   const listInnerRef = useRef();
   const [loading, setLoading] = useState(false);
+  const [selectAllCheckBox, setSelectAllCheckBox] = useState(false);
   console.log("table");
 
   useEffect(() => {
@@ -42,12 +50,19 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
     setTimeout(() => {
       setFilteredData(filtered);
       setLoading(false);
-    }, 2000);
+    }, 500);
   }, [details, searchTerm]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure to delete?")) {
       removeDetail(id);
+    }
+  };
+  const multipleDeleteHandler = () => {
+    if (window.confirm("Are you sure to delete Seleted Item?")) {
+      setSelectAllCheckBox(false);
+      const list = filteredData.filter((obj) => obj.checkBoxValue);
+      removeMutipleDetail(list);
     }
   };
 
@@ -87,6 +102,37 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
       filteredData.map((item) => {
         if (item.id === id) {
           item.showText = !item.showText;
+          return item;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+  const selectAllCheckBoxHandler = () => {
+    if (selectAllCheckBox) {
+      setSelectAllCheckBox(false);
+      setFilteredData((prev) =>
+        prev.map((item) => {
+          item.checkBoxValue = false;
+          return item;
+        })
+      );
+    } else {
+      setSelectAllCheckBox(true);
+      setFilteredData((prev) =>
+        prev.map((item) => {
+          item.checkBoxValue = true;
+          return item;
+        })
+      );
+    }
+  };
+  const singleCheckBoxHandler = (id) => {
+    setFilteredData(
+      filteredData.map((item) => {
+        if (item.id === id) {
+          item.checkBoxValue = !item.checkBoxValue;
           return item;
         } else {
           return item;
@@ -145,7 +191,18 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
             <Table className="table" striped bordered hover>
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        checked={selectAllCheckBox}
+                        onChange={() => selectAllCheckBoxHandler()}
+                        id="defaultCheck1"
+                      />
+                      <label className="form-check-label">Id</label>
+                    </div>
+                  </th>
                   <th>
                     Email{" "}
                     <span
@@ -172,31 +229,46 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
               {filteredData.length === 0 && "NO DATA FOUND"}
               {loading ? (
                 <tbody>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
-                  <td>
-                    <Skeleton height={40} count={10} />
-                  </td>
+                  <tr>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                    <td>
+                      <Skeleton height={40} count={10} />
+                    </td>
+                  </tr>
                 </tbody>
               ) : (
                 <tbody>
                   {filteredData.map((detail, index) => {
                     return (
                       <tr key={detail.id}>
-                        <td>{index + 1}</td>
+                        <td>
+                          {" "}
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              checked={detail.checkBoxValue}
+                              onChange={() => singleCheckBoxHandler(detail.id)}
+                            />
+                            <label className="form-check-label">
+                              {index + 1}
+                            </label>
+                          </div>
+                        </td>
                         <td>{detail.email}</td>
                         <td>
                           {detail.showPassword
@@ -276,6 +348,17 @@ function DataTable({ details, setDataEditTo, addDataOnDemand, removeDetail }) {
             </Table>
           </div>
         </>
+      )}
+      {(selectAllCheckBox ||
+        filteredData.some((obj) => obj.checkBoxValue === true)) && (
+        <Button
+          className="deletebutton"
+          variant="primary"
+          onClick={multipleDeleteHandler}
+        >
+          Delete Selected
+          <span class="material-symbols-outlined deleteicon">delete</span>
+        </Button>
       )}
     </Container>
   );
