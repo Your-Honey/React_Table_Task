@@ -32,14 +32,16 @@ function App() {
   };
 
   const addDataOnDemand = () => {
-    setDetails([
-      ...details,
-      ...userData.slice(
-        recordFetchedFromDb,
-        recordFetchedFromDb + countOfDataToFetch
-      ),
-    ]);
-    setRecordFetchedFromDb((prev) => prev + countOfDataToFetch);
+    if (recordFetchedFromDb < 30) {
+      setDetails([
+        ...details,
+        ...userData.slice(
+          recordFetchedFromDb,
+          recordFetchedFromDb + countOfDataToFetch
+        ),
+      ]);
+      setRecordFetchedFromDb((prev) => prev + countOfDataToFetch);
+    }
   };
 
   const removeDetail = (id) => {
