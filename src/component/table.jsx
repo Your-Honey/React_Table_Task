@@ -17,7 +17,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     }}
   >
     {children}
-    <span className="threedots" />
+    <span data-testid="threeDot" className="threedots" />
   </a>
 ));
 function DataTable({
@@ -206,6 +206,7 @@ function DataTable({
                   <th>
                     Email{" "}
                     <span
+                      data-testid="email-sort"
                       className="material-symbols-outlined icon"
                       onClick={() => handleSort("email")}
                     >
@@ -217,6 +218,7 @@ function DataTable({
                   <th>
                     Created At{" "}
                     <span
+                      data-testid="date-sort"
                       className="material-symbols-outlined icon"
                       onClick={() => handleSort("createdAt")}
                     >
@@ -269,8 +271,10 @@ function DataTable({
                             </label>
                           </div>
                         </td>
-                        <td>{detail.email}</td>
-                        <td>
+                        <td data-testid={`email-${index + 1}`}>
+                          {detail.email}
+                        </td>
+                        <td data-testid={`password-${index + 1}`}>
                           {detail.showPassword
                             ? detail.password
                             : "****************"}
@@ -289,7 +293,7 @@ function DataTable({
                             )}
                           </span>
                         </td>
-                        <td>
+                        <td data-testid={`about-${index + 1}`}>
                           {detail.about.length <= 20 ? (
                             detail.about
                           ) : detail.showText ? (
@@ -322,6 +326,7 @@ function DataTable({
                             <Dropdown.Toggle as={CustomToggle} />
                             <Dropdown.Menu size="sm" title="">
                               <Dropdown.Item
+                                data-testid={`Edit-${index + 1}`}
                                 onClick={() => setDataEditTo(detail)}
                               >
                                 Edit
@@ -330,6 +335,7 @@ function DataTable({
                                 </span>
                               </Dropdown.Item>
                               <Dropdown.Item
+                                data-testid={`Delete-${index + 1}`}
                                 onClick={() => deleteHandler(detail.id)}
                               >
                                 Delete{" "}
@@ -365,7 +371,7 @@ function DataTable({
 }
 
 function timeSince(date) {
-  const now = new Date().toLocaleString();
+  const now = new Date();
   const secondsPast =
     (new Date(now).getTime() - new Date(date).getTime()) / 1000;
 
@@ -378,7 +384,7 @@ function timeSince(date) {
   if (secondsPast <= 86400) {
     return parseInt(secondsPast / 3600) + " hours ago";
   }
-  if (secondsPast <= 259200) {
+  if (secondsPast <= 2592000) {
     return parseInt(secondsPast / 86400) + " days ago";
   }
   if (secondsPast <= 31104000) {

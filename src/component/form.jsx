@@ -44,8 +44,8 @@ export default function RegisterForm({
       if (editData) {
         editDetail({ ...editData, ...data });
       } else {
-        data.id = new Date().toLocaleString();
-        data.createdAt = new Date().toLocaleString();
+        data.id = new Date();
+        data.createdAt = new Date();
         data.showPassword = false;
         data.showText = false;
         data.checkBoxValue = false;

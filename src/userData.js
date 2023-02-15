@@ -11,6 +11,16 @@ export const userData = [
     checkBoxValue: false,
   },
   {
+    about: "ssssssssssssssssssssfsfsfffffffffffffff",
+    checkBoxValue: false,
+    createdAt: "Mon Feb 13 2023 12:13:21 GMT+0530 (India Standard Time)",
+    email: "garvit.sharma@gmail.com",
+    id: "Mon Feb 13 2023 12:13:21 GMT+0530 (India Standard Time)",
+    password: "Honey@12345",
+    showPassword: false,
+    showText: false,
+  },
+  {
     id: 2,
     email: "bradtraversy@gmail.com",
     password: "1234567890",

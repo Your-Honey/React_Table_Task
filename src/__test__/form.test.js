@@ -2,7 +2,39 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import RegisterForm from "../component/form";
 
 const addDetail = jest.fn();
-
+const editDetail = jest.fn();
+const details = [
+  {
+    id: 1,
+    email: "example1@email.com",
+    password: "password@E2",
+    about: "About me 1",
+    createdAt: "01/02/2022, 11:07:52",
+    showPassword: false,
+    showText: false,
+    checkBoxValue: false,
+  },
+  {
+    id: 2,
+    email: "example2@email.com",
+    password: "password@E2",
+    about: "About me 2 to long texttttttttttttttttttttttttttttt",
+    createdAt: "01/02/2023, 11:07:52",
+    showPassword: false,
+    showText: false,
+    checkBoxValue: false,
+  },
+];
+const editData = {
+  id: 2,
+  email: "example2@email.com",
+  password: "password@E2",
+  about: "About me 2 to long texttttttttttttttttttttttttttttt",
+  createdAt: "01/02/2023, 11:07:52",
+  showPassword: false,
+  showText: false,
+  checkBoxValue: false,
+};
 test("Should render email Input Box", () => {
   render(<RegisterForm />);
   const emailInput = screen.getByLabelText("Email Address");
@@ -27,21 +59,8 @@ test("Button Text should be Add When no edit data is passed", () => {
   expect(textOnButton).toBeInTheDocument();
 });
 
-test("Button Text should be Update When no edit data is passed", () => {
-  render(
-    <RegisterForm
-      editData={{
-        id: 2,
-        email: "bradtraversy@gmail.com",
-        password: "1234567890",
-        showPassword: false,
-        about: "It long established ",
-        showText: false,
-        createdAt: "01/02/2022, 11:07:52",
-        checkBoxValue: false,
-      }}
-    />
-  );
+test("Button Text should be Update When edit data is passed", () => {
+  render(<RegisterForm editData={editData} />);
   const textOnButton = screen.getByText("Update");
   expect(textOnButton).toBeInTheDocument();
 });
@@ -87,15 +106,15 @@ test("submits the form with correct input values", async () => {
           email: "demo@gmail.com",
           password: "Password@12345",
           about: "Demo about",
-          id: expect.any(String),
-          createdAt: expect.any(String),
+          id: expect.any(Date),
+          createdAt: expect.any(Date),
           showPassword: false,
           showText: false,
           checkBoxValue: false,
         },
       ]);
     },
-    { timeout: 4000 }
+    { timeout: 4100 }
   );
 });
 
@@ -107,37 +126,60 @@ test("Password input should be masked", () => {
   expect(passwordInput).toHaveAttribute("type", "password");
 });
 
-// test("displays error message if email already exists", async () => {
-//   render(
-//     <RegisterForm
-//       editData={null}
-//       details={[
-//         {
-//           email: "test1@example.com",
-//           password: "testpassword",
-//           about: "test about",
-//           id: "1",
-//           createdAt: "2022-02-06T17:22:47.364Z",
-//           showPassword: false,
-//           showText: false,
-//           checkBoxValue: false,
-//         },
-//       ]}
-//     />
-//   );
+test("Alert on email already exist", async () => {
+  const alertMock = jest.spyOn(window, "alert").mockImplementation();
+  render(
+    <RegisterForm details={details} editData={null} addDetail={addDetail} />
+  );
+  fireEvent.change(screen.getByLabelText("Email Address"), {
+    target: { value: "example1@email.com" },
+  });
+  fireEvent.change(screen.getByLabelText("Password"), {
+    target: { value: "Password@12345" },
+  });
+  fireEvent.change(screen.getByPlaceholderText("about"), {
+    target: { value: "Demo about" },
+  });
+  fireEvent.click(screen.getByText("Add"));
+  await waitFor(() => {
+    expect(alertMock).toHaveBeenCalledTimes(1);
+  });
+});
 
-//   fireEvent.change(screen.getByLabelText("Email Address"), {
-//     target: { value: "test1@example.com" },
-//   });
-//   fireEvent.change(screen.getByLabelText("Password"), {
-//     target: { value: "passwordA@123" },
-//   });
-//   fireEvent.change(screen.getByPlaceholderText("about"), {
-//     target: { value: "Demo test to Add in about" },
-//   });
+test("sumbit the data with correct edit input values", async () => {
+  render(
+    <RegisterForm
+      editData={editData}
+      details={details}
+      editDetail={editDetail}
+    />
+  );
 
-//   fireEvent.click(screen.getByText("Add"));
-//   await waitFor(() => {
-//     expect(window.alert).toHaveBeenCalledWith("Email Already Exit");
-//   });
-// });
+  fireEvent.change(screen.getByLabelText("Email Address"), {
+    target: { value: "change2@gmail.com" },
+  });
+  fireEvent.click(screen.getByText("Update"));
+  await waitFor(
+    () => {
+      expect(editDetail).toHaveBeenCalledWith({
+        id: 2,
+        email: "change2@gmail.com",
+        password: "password@E2",
+        about: "About me 2 to long texttttttttttttttttttttttttttttt",
+        createdAt: "01/02/2023, 11:07:52",
+        showPassword: false,
+        showText: false,
+        checkBoxValue: false,
+      });
+    },
+    { timeout: 4000 }
+  );
+});
+
+test("Should Show password when click on eye", () => {
+  render(<RegisterForm />);
+  const eyeIcon = screen.getByText("visibility");
+  const passwordInput = screen.getByLabelText("Password");
+  fireEvent.click(eyeIcon);
+  expect(passwordInput).toHaveAttribute("type", "text");
+});

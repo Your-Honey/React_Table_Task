@@ -25,12 +25,11 @@ test("Data Added through Form should show in table", async () => {
     target: { value: "Demo text for about" },
   });
   fireEvent.click(screen.getByText("Add"));
-  const tableRow = await waitFor(
-    async () => await screen.findByText("demo@gmail.com"),
-    {
-      timeout: 3000,
-    }
+  await waitFor(
+    () => {
+      const tableRow = screen.getByText("demo@gmail.com");
+      expect(tableRow).toBeInTheDocument();
+    },
+    { timeout: 4000 }
   );
-
-  expect(tableRow).toBeInTheDocument();
 });
